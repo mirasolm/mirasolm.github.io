@@ -4,31 +4,31 @@
 
 <h1>Instagram Technology Stack</h1>
 
-<p></p>
+<br>
 Social media is becoming increasingly popular in today’s world. People use social media to record and share their everyday lives with virtually anyone. Instagram, a free photo sharing application, is one of the most downloaded social media apps with a whopping 300 million monthly active users (Digital Marketing Ramblings).  Certainly, an application with this many downloads must have a substantial technology platform to support all of its users.
-<p></p>
+<br>
 
 <h2>OS/Hosting</h2>
 <p>To keep Instagram running nice and smoothly, they stick to three core principles when selecting a system: “keep it very simple, don’t re-invent the wheel, and go with proven and solid technologies when you can” (Instagram Engineering). Instagram surely followed their third principle when choosing their operating system (OS).  After experimenting with different Ubuntu versions and dealing with multiple freezing episodes on Amazon EC2, they stuck with Ubuntu Linux 11.04 (“Natty Narwhal”). Natty has proven to be reliable with the high amount of traffic this app receives.</p>
 
-<p></p>
+<br>
 
 <h2>Application Servers</h2>
 <p>Instagram must be prepared to handle loads of requests. In order to do this properly, they run Django on Amazon High-CPU Extra-Large machines. Django is high-level Python framework that allows developers to bring their app to life in a simple and clean way (https://www.djangoproject.com/).  This application server possesses the right balance of memory and CPU that Instagram needs. In addition, Instagram has tried out a couple of different WSGI servers, such as mod_wsgi and Apache, but now runs Gunicorn because it is easier to configure and less CPU-intensive (Instagram Engineering). “To run commands on many instances at once (like deploying code), Instagram uses Fabric, which recently added a useful parallel mode so that deploys take a matter of seconds” (Instagram Engineering).</p>
 
-<p></p>
+<br>
 
 <h2>Data Storage</h2>
 <p>Most of this app’s data (users, tags, photo metadata, etc.) is located in PostgreSQL. “Instagram found that Amazon’s network disk system (EBS) doesn’t support enough disk seeks per second, so having all of their working set in memory is extremely important” (Instagram Engineering). They set up their EBS drives in a software RAID using mdadm in order to obtain reasonable IO performance. To connect their databases from their app servers, they discovered that using Pgbouncer had the greatest impact (Instgram Engineering).</p>
 
-<p></p>
+<br>
 
 <h2>Monitoring</h2>
 <p>With Instagram being one of the top downloaded applications, it is crucial to be on top of what’s happening within the app.  To keep a close eye on things, they use Munin to pull metrics across the entire system, and to alert them if something is out of its normal range. Moreover, Instagram actually writes their own custom Munin plugins to graph metrics that aren’t system-level, such as signups per minute, photos posted per second, etc. Other systems they utilize for external monitoring include Pingdom and PagerDuty. Monitoring Python errors is especially important. To allow Instagram to see what errors are happening across their system in real-time, they use Sentry, an open-source Django app (Instagram Engineering). This helps eliminate any potential major problems.</p>
 
-<p></p>
-<p></p>
-<p></p>
+<br>
+<br>
+<br>
 <h3>Sources</h3>
 <ul>
 <li>Instagram Engineering: http://instagram-engineering.tumblr.com/post/13649370142/what-powers-instagram-hundreds-of-instances</li>
